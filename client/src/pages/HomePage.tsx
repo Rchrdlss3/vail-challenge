@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import ButtonComponent from "../components/Button";
 import InputComponent from "../components/Input";
 import { PingMessage } from "../types/PingTypes";
@@ -19,6 +19,7 @@ export const LoadingContext = createContext<LoadingContextType | null>(null);
 export default function HomePage () {
     const [loading, setLoading] = useState(true);
     const [message,setMessage] = useState<PingMessage>({} as PingMessage);
+    const [search,setSearch] = useState('');
 
     useEffect(() => {
         setLoading(false)
@@ -37,8 +38,8 @@ export default function HomePage () {
         {loading ? <ClipLoader/> : 
         <MessageContext.Provider value = {{message,setMessage}}>
             <LoadingContext.Provider value = {{loading,setLoading}}>
-            <InputComponent />
-            <ButtonComponent />
+            <InputComponent search={search} setSearch={setSearch}/>
+            <ButtonComponent search= {search}/>
             {loading ? <ClipLoader />:<MessaageComponent />}
             </LoadingContext.Provider>
         </MessageContext.Provider>

@@ -1,31 +1,26 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import { MessageContext } from "../../pages/HomePage"
+import { Box } from "@mui/material";
+import Typography from "@mui/material";
+import { BoxTextDisplayStyle, MessageBoxStyle } from "../../styles/General";
 
-export default function MessaageComponent() {
+export default function MessageComponent() {
     const PingMessage = useContext(MessageContext);
     return (
-        <div style = {{
-            width: '800px', 
-            height: '400px', 
-            border: '1px solid', 
-            borderRadius: 5,
-            display: 'flex',
-            gap: 0,
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            justifyContent: 'center',
-            fontWeight: 800
-            }}>
+        <Box 
+            sx = {MessageBoxStyle}>
             {PingMessage?.message.timestamp && 
             <div>
-                <p>{PingMessage?.message.echo}</p>
-                <p>{PingMessage?.message.env}</p>
-                <p>{PingMessage?.message.timestamp}</p>
-                <p>{PingMessage?.message.version}</p>
-            </div>
+                <Box sx={{ color: 'text.secondary' }}>Message</Box>
+                <Box sx={BoxTextDisplayStyle}>{PingMessage?.message.echo}</Box>
+                <Box sx={{ color: 'text.secondary' }}>Environment</Box>
+                <Box sx={BoxTextDisplayStyle}>{PingMessage?.message.env}</Box>
+                <Box sx={{ color: 'text.secondary' }}>Timestamp</Box>
+                <Box sx={BoxTextDisplayStyle}>{PingMessage?.message.timestamp}</Box>
+                <Box sx={{ color: 'text.secondary' }}>Version</Box>
+                <Box sx={BoxTextDisplayStyle}>{PingMessage?.message.version}</Box>
+            </div> 
             }
-
-        </div>
+        </Box>
     )
 }

@@ -1,15 +1,20 @@
-import { useContext } from "react"
-import { MessageContext } from "../../pages/HomePage"
+import { Dispatch, SetStateAction } from "react"
+import TextField from '@mui/material/TextField'
+import { TextFieldStyle } from "../../styles/General";
 
-export default function InputComponent() {
-    const PingMessage = useContext(MessageContext);
+interface InputComponentProps {
+    search: string;
+    setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export default function InputComponent({search,setSearch}:InputComponentProps) {
+    
     return (
-        <input
-        style = {{width: '600px', height: '80px',textAlign: 'center', borderRadius: '5px', border: '1px solid', fontWeight: 800, fontSize: '2em'}}
-            value = {PingMessage?.message.echo}
-            onChange = {(e)=> {
-                PingMessage?.setMessage({...PingMessage.message,echo: e.target.value})
-            }}
+        <TextField 
+        placeholder="Please Enter 20 Lowercase Characters."
+        sx={TextFieldStyle}
+        value={search}
+        onChange={(e) => {setSearch(e.target.value)}}
         />
     )
 }
