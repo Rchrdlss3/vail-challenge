@@ -1,7 +1,8 @@
 import { Request,Response } from "express";
-import { PingMessage } from "../../types/Ping.types";
+import { PingMessage } from "../../types/Ping";
 import pjson from '../../package.json' with {type: 'json'}
 import config from "../../config/config";
+
 const PingController = {
     post: (req:Request,res:Response) => {
         try {
@@ -14,7 +15,7 @@ const PingController = {
             }
             res.status(200).json(returnedMessage)
         } catch (e) {
-
+            res.status(500).json('Server side error.')
         }
     }
 };
